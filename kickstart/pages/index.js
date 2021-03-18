@@ -34,10 +34,10 @@ class CampaignIndex extends Component {
     render() {
         return (
             <Layout> 
-            <div> 
-                {this.props.campaigns[0]} 
-                <Button content='Create Campaign' icon='plus' labelPosition='left' primary />
-            </div>
+                <div> 
+                    <Button floated='right' content='Create Campaign' icon='plus circle' labelPosition='left' primary />
+                    {this.props.campaigns[0]} 
+                </div>
             </Layout>
         )
     }
