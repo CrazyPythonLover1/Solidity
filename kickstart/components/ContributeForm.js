@@ -3,10 +3,13 @@ import PropTypes from 'prop-types';
 import { Button, Form, Input, Message} from 'semantic-ui-react';
 import Campaign from '../ethereum/campaign';
 import web3 from '../ethereum/web3';
+import {Router} from '../routes';
 
 class ContributeForm extends Component {
      state = {
-         value: ''
+         value: '',
+         errorMessage: '',
+         loading: false
      };
 
     componentWillMount() {
@@ -25,6 +28,7 @@ class ContributeForm extends Component {
         event.preventDefault();
 
         const campaign = Campaign(this.props.address);
+        this.setState({loading: true, errorMessage: ''});
 
         try {
             const accounts = await web3.eth.getAccounts();
@@ -33,18 +37,18 @@ class ContributeForm extends Component {
                 value: web3.utils.toWei(this.state.value, 'ether')
             });
 
-            console.log(campaign)
-            console.log(this.state.value)
+            Router.replaceRoute(`/campaigns/${this.props.address}`)
 
         } catch (err) {
-            console.log(campaign)
-            console.log(this.state.value)
+            this.setState({errorMessage: err.message})
         }
+
+        this.setState({loading: false, value: ''})
     };
 
     render() {
         return (
-            <Form onSubmit={this.onSubmit}>
+            <Form onSubmit={this.onSubmit} error={!!this.state.errorMessage}>
                 <Form.Field>
                     <label> Amount to Contribute </label>
                     <Input 
@@ -55,7 +59,8 @@ class ContributeForm extends Component {
                         onChange={event => this.setState({ value: event.target.value })}
                     />
                 </Form.Field>
-                <Button type='submit' primary>
+                <Message error header='Oops!' content={this.state.errorMessage} />
+                <Button loading={this.state.loading} type='submit' primary>
                     Contribute!
                 </Button>
             </Form>
