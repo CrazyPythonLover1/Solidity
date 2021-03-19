@@ -1,5 +1,6 @@
-import React, { Component } from 'react'
-import { Menu } from 'semantic-ui-react'
+import React, { Component } from 'react';
+import { Menu } from 'semantic-ui-react';
+import { Link } from '../routes';
 
 export default class Header extends Component {
   state = {}
@@ -11,38 +12,46 @@ export default class Header extends Component {
 
     return (
       <Menu style={{marginTop:"10px"}}>
-        <Menu.Item
+        <Link 
+          route="/"
           name='browse'
           active={activeItem === 'browse'}
           onClick={this.handleItemClick}
         >
-          CrowdCoin
-        </Menu.Item>
+          <a className="item"> CrowdCoin </a>
+          
+        </Link>
 
-        {/* <Menu.Item
+        {/* <Link
           name='submit'
           active={activeItem === 'submit'}
           onClick={this.handleItemClick}
         >
+          <a className="item"> </a>
+
           Campaign
-        </Menu.Item> */}
+        </Link> */}
 
         <Menu.Menu position='right'>
-          <Menu.Item
+          <Link
+            route="/"
             name='signup'
             active={activeItem === 'signup'}
             onClick={this.handleItemClick}
           >
-            Campaign
-          </Menu.Item>
+          <a className="item"> Campaigns  </a>
+            
+          </Link>
 
-          <Menu.Item
+          <Link
+            route="/campaigns/new"
             name='help'
             active={activeItem === 'help'}
             onClick={this.handleItemClick}
           >
-            Help
-          </Menu.Item>
+          <a className="item"> +   </a>
+            
+          </Link>
         </Menu.Menu>
       </Menu>
     )
