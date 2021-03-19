@@ -37,7 +37,7 @@ class RequestNew extends Component {
                 )
                 .send({ from: accounts[0]});
 
-                Router.pushRoute(`campaigns/${this.props.address}/requests`)
+                Router.pushRoute(`/campaigns/${this.props.address}/requests`)
         } catch (err) {
             this.setState({ errorMessage: err.message})
         }
