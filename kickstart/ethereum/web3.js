@@ -6,7 +6,8 @@ const arrayNumber = [3,3 ,3 ,3]
 
 if (typeof window !== 'undefined' && typeof window.web3 !== 'undefined') {
     // we are in the browser and metamask is running
-    web3 = new Web3(window.web3.currentProvider);
+    web3 = new Web3(window.ethereum);
+    // web3 = new Web3(window.web3.currentProvider);
 } else {
     // we are on the server *OR* the user is not running metamask
     const provider = new Web3.providers.HttpProvider(
